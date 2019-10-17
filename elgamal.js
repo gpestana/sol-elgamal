@@ -1,13 +1,29 @@
 'use strict';
+const BigInt = require('jsbn').BigInteger;
 
-function NewContext(p, g, y) {
-  return { p, g, y };
+function GenKey(g, p, x) {
+  const y = g.modPowInt(x, p);
+  const pk = { g, p, y };
+  console.log("PUBLIC KEY: " + y);
+
+  return { pk, x };
 }
 
-function GenKey(ctx) {}
-function Encrypt(ctx, rand, m) {}
-function Decrypt(ctx, c) {}
+function Encrypt(pk, rand, m) {
+  // check if message is too long for encryption?
+  let c = {
+    c1: new BigInt('0'),
+    c2: new BigInt('0'),
+  };
+
+  return c;
+}
+
+function Decrypt(sk, c) {
+  let m;
+  return m;
+}
 
 module.exports = {
-  NewContext, GenKey, Encrypt, Decrypt
+  GenKey, Encrypt, Decrypt
 }
